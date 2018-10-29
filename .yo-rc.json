@@ -34,7 +34,9 @@
     "clientFramework": "angularX",
     "jhiPrefix": "jhi",
     "jhipsterVersion": "5.5.0",
-    "jwtSecretKey": "ZmUxNWI0M2Q1NGUxYTZkZDJmNTRlYWNkYzdiZmM1ZDgwN2RjZjc3NjcyNTY1YTBjZGRmOWI4N2Y1MmQ4YjJmNTA4YzgxN2EyNjk4ZjU4YmM0ZDgxNTlkMmY5NTVmYWQ0NjM5MDA2MzY1YmI5ZjkzZWQ4M2MxNDNiYjE4ODc3ZTg="
+    "jwtSecretKey": "ZmUxNWI0M2Q1NGUxYTZkZDJmNTRlYWNkYzdiZmM1ZDgwN2RjZjc3NjcyNTY1YTBjZGRmOWI4N2Y1MmQ4YjJmNTA4YzgxN2EyNjk4ZjU4YmM0ZDgxNTlkMmY5NTVmYWQ0NjM5MDA2MzY1YmI5ZjkzZWQ4M2MxNDNiYjE4ODc3ZTg=",
+    "herokuAppName": "dev-campfire",
+    "herokuDeployType": "git"
   },
   "git-provider": "GitHub",
   "git-company": "teambasecompany",
