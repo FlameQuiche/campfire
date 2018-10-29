@@ -1,0 +1,70 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="campFireApp.bookmark.home.title">Bookmarks</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-bookmark-mpm" [routerLink]="['/bookmark-mpm/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="campFireApp.bookmark.home.createLabel">
+            Create new Bookmark
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="bookmarks">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="name"><span jhiTranslate="campFireApp.bookmark.name">Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="url"><span jhiTranslate="campFireApp.bookmark.url">Url</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="folderName"><span jhiTranslate="campFireApp.bookmark.folder">Folder</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let bookmark of bookmarks ;trackBy: trackId">
+                <td><a [routerLink]="['/bookmark-mpm', bookmark.id, 'view' ]">{{bookmark.id}}</a></td>
+                <td>{{bookmark.name}}</td>
+                <td>{{bookmark.url}}</td>
+                <td>
+                    <div *ngIf="bookmark.folderId">
+                        <a [routerLink]="['../folder-mpm', bookmark.folderId , 'view' ]" >{{bookmark.folderName}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/bookmark-mpm', bookmark.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/bookmark-mpm', bookmark.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'bookmark-mpm/'+ bookmark.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="bookmarks && bookmarks.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

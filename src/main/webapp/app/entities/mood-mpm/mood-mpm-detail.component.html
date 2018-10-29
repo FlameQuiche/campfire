@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="mood">
+            <h2><span jhiTranslate="campFireApp.mood.detail.title">Mood</span> {{mood.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="campFireApp.mood.rank">Rank</span></dt>
+                <dd>
+                    <span>{{mood.rank}}</span>
+                </dd>
+                <dt><span jhiTranslate="campFireApp.mood.date">Date</span></dt>
+                <dd>
+                    <span>{{mood.date}}</span>
+                </dd>
+                <dt><span jhiTranslate="campFireApp.mood.user">User</span></dt>
+                <dd>
+                    {{mood.userLogin}}
+                </dd>
+                <dt><span jhiTranslate="campFireApp.mood.sprint">Sprint</span></dt>
+                <dd>
+                    <div *ngIf="mood.sprintId">
+                        <a [routerLink]="['/sprint-mpm', mood.sprintId, 'view']">{{mood.sprintName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/mood-mpm', mood.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

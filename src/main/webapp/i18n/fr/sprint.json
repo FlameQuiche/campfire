@@ -1,0 +1,27 @@
+
+{
+    "campFireApp": {
+        "sprint" : {
+            "home": {
+                "title": "Sprints",
+                "createLabel": "Créer un nouveau Sprint",
+                "createOrEditLabel": "Créer ou éditer un Sprint"
+            },
+            "created": "Un nouveau Sprint a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Sprint avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Sprint avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Sprint {{ id }} ?"
+            },
+            "detail": {
+                "title": "Sprint"
+            },
+            "name": "Name",
+            "beginDate": "Begin Date",
+            "endDate": "End Date",
+            "team": "Team",
+            "mood": "Mood",
+            "action": "Action"
+        }
+    }
+}

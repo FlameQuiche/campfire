@@ -1,0 +1,25 @@
+
+{
+    "campFireApp": {
+        "mood" : {
+            "home": {
+                "title": "Moods",
+                "createLabel": "Create a new Mood",
+                "createOrEditLabel": "Create or edit a Mood"
+            },
+            "created": "A new Mood is created with identifier {{ param }}",
+            "updated": "A Mood is updated with identifier {{ param }}",
+            "deleted": "A Mood is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Mood {{ id }}?"
+            },
+            "detail": {
+                "title": "Mood"
+            },
+            "rank": "Rank",
+            "date": "Date",
+            "user": "User",
+            "sprint": "Sprint"
+        }
+    }
+}

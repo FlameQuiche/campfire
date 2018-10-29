@@ -1,0 +1,56 @@
+{
+    "name": "Sprint",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "beginDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "endDate",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "team",
+            "otherEntityName": "team",
+            "otherEntityField": "name"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "mood",
+            "otherEntityName": "mood",
+            "otherEntityRelationshipName": "sprint"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "action",
+            "otherEntityName": "action",
+            "otherEntityRelationshipName": "sprint"
+        }
+    ],
+    "changelogDate": "20181029120327",
+    "entityTableName": "sprint",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "mpm"
+}

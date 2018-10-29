@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="bookmark">
+            <h2><span jhiTranslate="campFireApp.bookmark.detail.title">Bookmark</span> {{bookmark.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="campFireApp.bookmark.name">Name</span></dt>
+                <dd>
+                    <span>{{bookmark.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="campFireApp.bookmark.url">Url</span></dt>
+                <dd>
+                    <span>{{bookmark.url}}</span>
+                </dd>
+                <dt><span jhiTranslate="campFireApp.bookmark.folder">Folder</span></dt>
+                <dd>
+                    <div *ngIf="bookmark.folderId">
+                        <a [routerLink]="['/folder-mpm', bookmark.folderId, 'view']">{{bookmark.folderName}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/bookmark-mpm', bookmark.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

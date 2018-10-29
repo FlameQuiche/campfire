@@ -1,0 +1,70 @@
+entity Folder {
+	id Long,
+    name String required
+}
+
+entity Bookmark {
+	id Long,
+    name String required,
+    url String required
+}
+
+entity Sprint {
+	id Long,
+    name String required,
+    beginDate LocalDate required,
+    endDate LocalDate required
+}
+
+entity Mood {
+	id Long,
+    rank Integer required,
+    date LocalDate required
+}
+
+entity Idea {
+	id Long,
+    description String required
+}
+
+enum Status {
+	BLOCKED, TODO, IN_PROGRESS, DONE, DEPRECATED
+}
+entity Action {
+	id Long,
+    description String required,
+    responsible String required,
+    status Status required
+}
+
+entity Team {
+	id Long,
+    name String
+}
+
+relationship ManyToOne {
+	Bookmark{folder(name)} to Folder{bookmark},
+    Idea{user(login)} to User,
+    Mood{user(login)} to User,
+    Mood{sprint(name)} to Sprint{mood},
+    Action{sprint(name)} to Sprint{action},
+    Sprint{team(name)} to Team{sprint},
+    Folder{team(name)} to Team{folder}
+
+}
+
+relationship ManyToMany {
+	Folder{subFolder(name)} to Folder
+}
+
+// Set pagination options
+// paginate JobHistory, Employee with infinite-scroll
+paginate Folder, Bookmark, Sprint, Idea, Action with pagination
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+angularSuffix * with mpm

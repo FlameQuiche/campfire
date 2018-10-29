@@ -1,0 +1,12 @@
+{
+    "campFireApp": {
+        "Status" : {
+            "null": "",
+            "BLOCKED": "BLOCKED",
+            "TODO": "TODO",
+            "IN_PROGRESS": "IN_PROGRESS",
+            "DONE": "DONE",
+            "DEPRECATED": "DEPRECATED"
+        }
+    }
+}

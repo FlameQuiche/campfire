@@ -1,0 +1,24 @@
+
+{
+    "campFireApp": {
+        "bookmark" : {
+            "home": {
+                "title": "Bookmarks",
+                "createLabel": "Créer un nouveau Bookmark",
+                "createOrEditLabel": "Créer ou éditer un Bookmark"
+            },
+            "created": "Un nouveau Bookmark a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Bookmark avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Bookmark avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Bookmark {{ id }} ?"
+            },
+            "detail": {
+                "title": "Bookmark"
+            },
+            "name": "Name",
+            "url": "Url",
+            "folder": "Folder"
+        }
+    }
+}

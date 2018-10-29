@@ -1,0 +1,23 @@
+
+{
+    "campFireApp": {
+        "idea" : {
+            "home": {
+                "title": "Ideas",
+                "createLabel": "Créer un nouveau Idea",
+                "createOrEditLabel": "Créer ou éditer un Idea"
+            },
+            "created": "Un nouveau Idea a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Idea avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Idea avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Idea {{ id }} ?"
+            },
+            "detail": {
+                "title": "Idea"
+            },
+            "description": "Description",
+            "user": "User"
+        }
+    }
+}

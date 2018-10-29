@@ -1,0 +1,39 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="folder">
+            <h2><span jhiTranslate="campFireApp.folder.detail.title">Folder</span> {{folder.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="campFireApp.folder.name">Name</span></dt>
+                <dd>
+                    <span>{{folder.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="campFireApp.folder.team">Team</span></dt>
+                <dd>
+                    <div *ngIf="folder.teamId">
+                        <a [routerLink]="['/team-mpm', folder.teamId, 'view']">{{folder.teamName}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="campFireApp.folder.subFolder">Sub Folder</span></dt>
+                <dd>
+                    <span *ngFor="let subFolder of folder.subFolders; let last = last">
+                        <a [routerLink]="['/folder-mpm', subFolder?.id, 'view' ]">{{subFolder.name}}</a>{{last ? '' : ', '}}
+                    </span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/folder-mpm', folder.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
