@@ -1,6 +1,12 @@
 # CampFire
 This application was generated using JHipster 5.5.0, you can find documentation and help at [https://www.jhipster.tech/documentation-archive/v5.5.0](https://www.jhipster.tech/documentation-archive/v5.5.0).
 
+## Build status (develop branch)
+![build status of develop branch](https://travis-ci.org/teambasecompany/campfire.svg?branch=develop)
+
+## Build status (master branch)
+![build status of master branch](https://travis-ci.org/teambasecompany/campfire.svg?branch=master)
+
 ## Development
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
