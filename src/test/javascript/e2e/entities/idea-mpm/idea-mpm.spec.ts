@@ -38,7 +38,11 @@ describe('Idea e2e test', () => {
         const nbButtonsBeforeCreate = await ideaComponentsPage.countDeleteButtons();
 
         await ideaComponentsPage.clickOnCreateButton();
-        await promise.all([ideaUpdatePage.setDescriptionInput('description'), ideaUpdatePage.userSelectLastOption()]);
+        await promise.all([
+            ideaUpdatePage.setDescriptionInput('description'),
+            ideaUpdatePage.userSelectLastOption(),
+            ideaUpdatePage.teamSelectLastOption()
+        ]);
         expect(await ideaUpdatePage.getDescriptionInput()).to.eq('description');
         await ideaUpdatePage.save();
         expect(await ideaUpdatePage.getSaveButton().isPresent()).to.be.false;

@@ -2,7 +2,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { CampFireSharedModule } from 'app/shared';
-import { CampFireAdminModule } from 'app/admin/admin.module';
 import {
     MoodMpmComponent,
     MoodMpmDetailComponent,
@@ -16,7 +15,7 @@ import {
 const ENTITY_STATES = [...moodRoute, ...moodPopupRoute];
 
 @NgModule({
-    imports: [CampFireSharedModule, CampFireAdminModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [CampFireSharedModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         MoodMpmComponent,
         MoodMpmDetailComponent,

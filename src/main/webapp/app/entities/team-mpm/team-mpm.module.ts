@@ -9,7 +9,8 @@ import {
     TeamMpmDeletePopupComponent,
     TeamMpmDeleteDialogComponent,
     teamRoute,
-    teamPopupRoute
+    teamPopupRoute,
+    TeamMpmJoinComponent
 } from './';
 
 const ENTITY_STATES = [...teamRoute, ...teamPopupRoute];
@@ -21,9 +22,16 @@ const ENTITY_STATES = [...teamRoute, ...teamPopupRoute];
         TeamMpmDetailComponent,
         TeamMpmUpdateComponent,
         TeamMpmDeleteDialogComponent,
-        TeamMpmDeletePopupComponent
+        TeamMpmDeletePopupComponent,
+        TeamMpmJoinComponent
     ],
-    entryComponents: [TeamMpmComponent, TeamMpmUpdateComponent, TeamMpmDeleteDialogComponent, TeamMpmDeletePopupComponent],
+    entryComponents: [
+        TeamMpmComponent,
+        TeamMpmUpdateComponent,
+        TeamMpmDeleteDialogComponent,
+        TeamMpmDeletePopupComponent,
+        TeamMpmJoinComponent
+    ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CampFireTeamMpmModule {}

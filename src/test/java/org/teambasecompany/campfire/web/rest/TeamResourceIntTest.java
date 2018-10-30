@@ -1,33 +1,34 @@
 package org.teambasecompany.campfire.web.rest;
 
-import org.teambasecompany.campfire.CampFireApp;
-
-import org.teambasecompany.campfire.domain.Team;
-import org.teambasecompany.campfire.repository.TeamRepository;
-import org.teambasecompany.campfire.service.TeamService;
-import org.teambasecompany.campfire.service.dto.TeamDTO;
-import org.teambasecompany.campfire.service.mapper.TeamMapper;
-import org.teambasecompany.campfire.web.rest.errors.ExceptionTranslator;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+import org.teambasecompany.campfire.CampFireApp;
+import org.teambasecompany.campfire.domain.Team;
+import org.teambasecompany.campfire.domain.User;
+import org.teambasecompany.campfire.domain.UserDetails;
+import org.teambasecompany.campfire.repository.TeamRepository;
+import org.teambasecompany.campfire.repository.UserDetailsRepository;
+import org.teambasecompany.campfire.service.dto.TeamDTO;
+import org.teambasecompany.campfire.service.mapper.TeamMapper;
 
+import java.util.Collections;
 import java.util.List;
 
-
-import static org.teambasecompany.campfire.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -37,6 +38,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @see TeamResource
  */
 @RunWith(SpringRunner.class)
+@AutoConfigureMockMvc
+@WebAppConfiguration
 @SpringBootTest(classes = CampFireApp.class)
 public class TeamResourceIntTest {
 
@@ -48,32 +51,24 @@ public class TeamResourceIntTest {
 
     @Autowired
     private TeamMapper teamMapper;
-    
-    @Autowired
-    private TeamService teamService;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
+    private UserDetailsRepository userDetailsRepository;
 
     @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
+    private WebApplicationContext webApplicationContext;
 
     private MockMvc restTeamMockMvc;
 
     private Team team;
+    private UserDetails userDetails;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final TeamResource teamResource = new TeamResource(teamService);
-        this.restTeamMockMvc = MockMvcBuilders.standaloneSetup(teamResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter).build();
+        this.restTeamMockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
+            .apply(springSecurity())
+        .build();
     }
 
     /**
@@ -81,20 +76,26 @@ public class TeamResourceIntTest {
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
+     * @param userDetails member of team
      */
-    public static Team createEntity() {
-        Team team = new Team()
-            .name(DEFAULT_NAME);
-        return team;
+    public static Team createEntity(UserDetails userDetails) {
+        return new Team()
+            .name(DEFAULT_NAME)
+            .members(Collections.singleton(userDetails));
     }
 
     @Before
     public void initTest() {
         teamRepository.deleteAll();
-        team = createEntity();
+        User user = new User();
+        user.setId("user");
+        userDetails = new UserDetails().user(user);
+        userDetails.setId("user");
+        team = createEntity(userDetails);
     }
 
     @Test
+    @WithMockUser
     public void createTeam() throws Exception {
         int databaseSizeBeforeCreate = teamRepository.findAll().size();
 
@@ -113,6 +114,7 @@ public class TeamResourceIntTest {
     }
 
     @Test
+    @WithMockUser
     public void createTeamWithExistingId() throws Exception {
         int databaseSizeBeforeCreate = teamRepository.findAll().size();
 
@@ -132,19 +134,22 @@ public class TeamResourceIntTest {
     }
 
     @Test
+    @WithMockUser
     public void getAllTeams() throws Exception {
         // Initialize the database
         teamRepository.save(team);
+        userDetailsRepository.save(userDetails);
 
         // Get all the teamList
         restTeamMockMvc.perform(get("/api/teams?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(team.getId())))
-            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())));
+            .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)));
     }
-    
+
     @Test
+    @WithMockUser
     public void getTeam() throws Exception {
         // Initialize the database
         teamRepository.save(team);
@@ -154,10 +159,11 @@ public class TeamResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(team.getId()))
-            .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()));
+            .andExpect(jsonPath("$.name").value(DEFAULT_NAME));
     }
 
     @Test
+    @WithMockUser
     public void getNonExistingTeam() throws Exception {
         // Get the team
         restTeamMockMvc.perform(get("/api/teams/{id}", Long.MAX_VALUE))
@@ -165,6 +171,7 @@ public class TeamResourceIntTest {
     }
 
     @Test
+    @WithMockUser
     public void updateTeam() throws Exception {
         // Initialize the database
         teamRepository.save(team);
@@ -190,6 +197,7 @@ public class TeamResourceIntTest {
     }
 
     @Test
+    @WithMockUser
     public void updateNonExistingTeam() throws Exception {
         int databaseSizeBeforeUpdate = teamRepository.findAll().size();
 
@@ -208,6 +216,7 @@ public class TeamResourceIntTest {
     }
 
     @Test
+    @WithMockUser
     public void deleteTeam() throws Exception {
         // Initialize the database
         teamRepository.save(team);

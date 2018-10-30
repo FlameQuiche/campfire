@@ -16,7 +16,9 @@ public class IdeaDTO implements Serializable {
 
     private String userId;
 
-    private String userLogin;
+    private String teamId;
+
+    private String teamName;
 
     public String getId() {
         return id;
@@ -38,16 +40,24 @@ public class IdeaDTO implements Serializable {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setUserId(String userDetailsId) {
+        this.userId = userDetailsId;
     }
 
-    public String getUserLogin() {
-        return userLogin;
+    public String getTeamId() {
+        return teamId;
     }
 
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     @Override
@@ -77,7 +87,8 @@ public class IdeaDTO implements Serializable {
             "id=" + getId() +
             ", description='" + getDescription() + "'" +
             ", user=" + getUserId() +
-            ", user='" + getUserLogin() + "'" +
+            ", team=" + getTeamId() +
+            ", team='" + getTeamName() + "'" +
             "}";
     }
 }

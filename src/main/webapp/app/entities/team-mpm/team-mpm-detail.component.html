@@ -1,13 +1,33 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="team">
-            <h2><span jhiTranslate="campFireApp.team.detail.title">Team</span> {{team.id}}</h2>
+            <h2>{{team.name}}</h2>
             <hr>
             <jhi-alert-error></jhi-alert-error>
+
+            <div *ngIf="success === 'OK'" class="alert alert-success" jhiTranslate="campFireApp.team.sent">Invitation sent.</div>
+
             <dl class="row-md jh-entity-details">
-                <dt><span jhiTranslate="campFireApp.team.name">Name</span></dt>
+                <dt><span jhiTranslate="campFireApp.team.member">Member</span></dt>
                 <dd>
-                    <span>{{team.name}}</span>
+                    <span>{{team.members}}</span>
+                </dd>
+            </dl>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="campFireApp.team.add-member">Add member</span></dt>
+                <dd>
+                    <form name="invitForm" role="form" #invitForm="ngForm">
+                        <input type="text" class="form-control" name="member-email"
+                               [(ngModel)]="newMemberEmail" placeholder="Email" required
+                                pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$"/>
+                        <button type="submit"
+                                (click)="sendInvitation()"
+                                class="btn btn-warning"
+                                style="margin-top: 5px;"
+                                [disabled]="invitForm.form.invalid">
+                            <span jhiTranslate="campFireApp.team.send">Send</span>
+                        </button>
+                    </form>
                 </dd>
             </dl>
 

@@ -33,7 +33,7 @@ public class Mood implements Serializable {
     @DBRef
     @Field("user")
     @JsonIgnoreProperties("")
-    private User user;
+    private UserDetails user;
 
     @DBRef
     @Field("sprint")
@@ -75,17 +75,17 @@ public class Mood implements Serializable {
         this.date = date;
     }
 
-    public User getUser() {
+    public UserDetails getUser() {
         return user;
     }
 
-    public Mood user(User user) {
-        this.user = user;
+    public Mood user(UserDetails userDetails) {
+        this.user = userDetails;
         return this;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserDetails userDetails) {
+        this.user = userDetails;
     }
 
     public Sprint getSprint() {

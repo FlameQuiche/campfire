@@ -28,6 +28,7 @@ export class IdeaUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     descriptionInput = element(by.id('field_description'));
     userSelect = element(by.id('field_user'));
+    teamSelect = element(by.id('field_team'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -58,6 +59,25 @@ export class IdeaUpdatePage {
 
     async getUserSelectedOption() {
         return this.userSelect.element(by.css('option:checked')).getText();
+    }
+
+    async teamSelectLastOption() {
+        await this.teamSelect
+            .all(by.tagName('option'))
+            .last()
+            .click();
+    }
+
+    async teamSelectOption(option) {
+        await this.teamSelect.sendKeys(option);
+    }
+
+    getTeamSelect(): ElementFinder {
+        return this.teamSelect;
+    }
+
+    async getTeamSelectedOption() {
+        return this.teamSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

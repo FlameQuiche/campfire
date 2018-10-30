@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,12 +44,12 @@ public class TeamResource {
      */
     @PostMapping("/teams")
     @Timed
-    public ResponseEntity<TeamDTO> createTeam(@RequestBody TeamDTO teamDTO) throws URISyntaxException {
+    public ResponseEntity<TeamDTO> createTeam(@RequestBody TeamDTO teamDTO, Principal principal) throws URISyntaxException {
         log.debug("REST request to save Team : {}", teamDTO);
         if (teamDTO.getId() != null) {
             throw new BadRequestAlertException("A new team cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        TeamDTO result = teamService.save(teamDTO);
+        TeamDTO result = teamService.create(teamDTO, principal.getName());
         return ResponseEntity.created(new URI("/api/teams/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -83,9 +84,9 @@ public class TeamResource {
      */
     @GetMapping("/teams")
     @Timed
-    public List<TeamDTO> getAllTeams() {
+    public List<TeamDTO> getAllTeams(Principal principal) {
         log.debug("REST request to get all Teams");
-        return teamService.findAll();
+        return teamService.findAll(principal.getName());
     }
 
     /**
@@ -114,5 +115,19 @@ public class TeamResource {
         log.debug("REST request to delete Team : {}", id);
         teamService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
+    }
+
+    @PostMapping("/teams/{id}/invite")
+    @Timed
+    public void inviteInTeam(@PathVariable String id, @RequestBody String mail, Principal principal) {
+        log.debug("REST request to invite {} to Team : {}", mail, id);
+        teamService.sendInvitation(principal.getName(), mail, id);
+    }
+
+    @PostMapping("/teams/{id}/join")
+    @Timed
+    public void joinTeam(@PathVariable String id, Principal principal) {
+        log.debug("REST request to join {} to Team : {}", principal.getName(), id);
+        teamService.joinTeam(id, principal.getName());
     }
 }

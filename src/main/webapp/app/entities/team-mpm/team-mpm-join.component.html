@@ -1,0 +1,18 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="team">
+            <h2><span jhiTranslate="campFireApp.team.join">Join</span> {{team.name}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+
+            <div *ngIf="success === 'OK'" class="alert alert-success" jhiTranslate="campFireApp.team.joined">You joined the team!</div>
+
+            <button type="submit"
+                    (click)="joinTeam()"
+                    class="btn btn-primary"
+                    [disabled]="isSaving">
+                <fa-icon [icon]="'check'"></fa-icon>&nbsp;<span jhiTranslate="campFireApp.team.join"> Join</span>
+            </button>
+        </div>
+    </div>
+</div>

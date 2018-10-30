@@ -28,7 +28,12 @@ public class Idea implements Serializable {
     @DBRef
     @Field("user")
     @JsonIgnoreProperties("")
-    private User user;
+    private UserDetails user;
+
+    @DBRef
+    @Field("team")
+    @JsonIgnoreProperties("ideas")
+    private Team team;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -52,17 +57,30 @@ public class Idea implements Serializable {
         this.description = description;
     }
 
-    public User getUser() {
+    public UserDetails getUser() {
         return user;
     }
 
-    public Idea user(User user) {
-        this.user = user;
+    public Idea user(UserDetails userDetails) {
+        this.user = userDetails;
         return this;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(UserDetails userDetails) {
+        this.user = userDetails;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public Idea team(Team team) {
+        this.team = team;
+        return this;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

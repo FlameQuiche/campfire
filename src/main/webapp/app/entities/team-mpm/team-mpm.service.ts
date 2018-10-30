@@ -35,4 +35,12 @@ export class TeamMpmService {
     delete(id: string): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
+
+    invite(id: String, mail: String): Observable<EntityResponseType> {
+        return this.http.post<any>(`${this.resourceUrl}/${id}/invite`, mail, { observe: 'response' });
+    }
+
+    join(id: String): Observable<EntityResponseType> {
+        return this.http.post<any>(`${this.resourceUrl}/${id}/join`, {}, { observe: 'response' });
+    }
 }

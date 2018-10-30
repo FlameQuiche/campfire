@@ -16,9 +16,18 @@
             "detail": {
                 "title": "Team"
             },
+            "add-member": "Add member",
             "name": "Name",
             "sprint": "Sprint",
-            "folder": "Folder"
+            "folder": "Folder",
+            "join": "Join",
+            "joined": "You joined the team!",
+            "joined-error": "An error occurred, ask you administrator.",
+            "member": "Member",
+            "send": "Send",
+            "sent": "Invitation sent.",
+            "sent-error": "An error occurred, ask you administrator.",
+            "idea": "Idea"
         }
     }
 }

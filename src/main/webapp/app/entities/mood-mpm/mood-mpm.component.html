@@ -28,7 +28,9 @@
                 <td>{{mood.rank}}</td>
                 <td>{{mood.date | date:'mediumDate'}}</td>
                 <td>
-                    {{mood.userLogin}}
+                    <div *ngIf="mood.userId">
+                        <a [routerLink]="['../user-details-mpm', mood.userId , 'view' ]" >{{mood.userId}}</a>
+                    </div>
                 </td>
                 <td>
                     <div *ngIf="mood.sprintId">

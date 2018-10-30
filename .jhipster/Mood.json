@@ -20,8 +20,8 @@
         {
             "relationshipType": "many-to-one",
             "relationshipName": "user",
-            "otherEntityName": "user",
-            "otherEntityField": "login"
+            "otherEntityName": "userDetails",
+            "otherEntityField": "id"
         },
         {
             "relationshipType": "many-to-one",

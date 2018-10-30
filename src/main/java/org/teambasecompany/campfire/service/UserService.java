@@ -3,11 +3,14 @@ package org.teambasecompany.campfire.service;
 import org.teambasecompany.campfire.config.Constants;
 import org.teambasecompany.campfire.domain.Authority;
 import org.teambasecompany.campfire.domain.User;
+import org.teambasecompany.campfire.domain.UserDetails;
 import org.teambasecompany.campfire.repository.AuthorityRepository;
+import org.teambasecompany.campfire.repository.UserDetailsRepository;
 import org.teambasecompany.campfire.repository.UserRepository;
 import org.teambasecompany.campfire.security.AuthoritiesConstants;
 import org.teambasecompany.campfire.security.SecurityUtils;
 import org.teambasecompany.campfire.service.dto.UserDTO;
+import org.teambasecompany.campfire.service.dto.UserDetailsDTO;
 import org.teambasecompany.campfire.service.util.RandomUtil;
 import org.teambasecompany.campfire.web.rest.errors.*;
 
@@ -39,12 +42,15 @@ public class UserService {
 
     private final AuthorityRepository authorityRepository;
 
+    private final UserDetailsService userDetailsService;
+
     private final CacheManager cacheManager;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, CacheManager cacheManager) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthorityRepository authorityRepository, UserDetailsService userDetailsService, CacheManager cacheManager) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authorityRepository = authorityRepository;
+        this.userDetailsService = userDetailsService;
         this.cacheManager = cacheManager;
     }
 
@@ -119,6 +125,7 @@ public class UserService {
         authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
+        userDetailsService.save(new UserDetailsDTO(newUser.getLogin()));
         this.clearUserCaches(newUser);
         log.debug("Created Information for User: {}", newUser);
         return newUser;

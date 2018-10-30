@@ -7,6 +7,7 @@ import { CampFireMoodMpmModule } from './mood-mpm/mood-mpm.module';
 import { CampFireIdeaMpmModule } from './idea-mpm/idea-mpm.module';
 import { CampFireActionMpmModule } from './action-mpm/action-mpm.module';
 import { CampFireTeamMpmModule } from './team-mpm/team-mpm.module';
+import { CampFireUserDetailsMpmModule } from './user-details-mpm/user-details-mpm.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -19,6 +20,7 @@ import { CampFireTeamMpmModule } from './team-mpm/team-mpm.module';
         CampFireIdeaMpmModule,
         CampFireActionMpmModule,
         CampFireTeamMpmModule,
+        CampFireUserDetailsMpmModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
