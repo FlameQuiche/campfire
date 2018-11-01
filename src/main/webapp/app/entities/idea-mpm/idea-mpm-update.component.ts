@@ -6,7 +6,10 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IIdeaMpm } from 'app/shared/model/idea-mpm.model';
 import { IdeaMpmService } from './idea-mpm.service';
-import { IUser, UserService } from 'app/core';
+import { IUserDetailsMpm } from 'app/shared/model/user-details-mpm.model';
+import { UserDetailsMpmService } from 'app/entities/user-details-mpm';
+import { ITeamMpm } from 'app/shared/model/team-mpm.model';
+import { TeamMpmService } from 'app/entities/team-mpm';
 
 @Component({
     selector: 'jhi-idea-mpm-update',
@@ -16,12 +19,15 @@ export class IdeaMpmUpdateComponent implements OnInit {
     idea: IIdeaMpm;
     isSaving: boolean;
 
-    users: IUser[];
+    userdetails: IUserDetailsMpm[];
+
+    teams: ITeamMpm[];
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private ideaService: IdeaMpmService,
-        private userService: UserService,
+        private userDetailsService: UserDetailsMpmService,
+        private teamService: TeamMpmService,
         private activatedRoute: ActivatedRoute
     ) {}
 
@@ -30,9 +36,15 @@ export class IdeaMpmUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ idea }) => {
             this.idea = idea;
         });
-        this.userService.query().subscribe(
-            (res: HttpResponse<IUser[]>) => {
-                this.users = res.body;
+        this.userDetailsService.query().subscribe(
+            (res: HttpResponse<IUserDetailsMpm[]>) => {
+                this.userdetails = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.teamService.query().subscribe(
+            (res: HttpResponse<ITeamMpm[]>) => {
+                this.teams = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -68,7 +80,11 @@ export class IdeaMpmUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackUserById(index: number, item: IUser) {
+    trackUserDetailsById(index: number, item: IUserDetailsMpm) {
+        return item.id;
+    }
+
+    trackTeamById(index: number, item: ITeamMpm) {
         return item.id;
     }
 }

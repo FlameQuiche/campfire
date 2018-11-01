@@ -15,7 +15,9 @@
                 </dd>
                 <dt><span jhiTranslate="campFireApp.mood.user">User</span></dt>
                 <dd>
-                    {{mood.userLogin}}
+                    <div *ngIf="mood.userId">
+                        <a [routerLink]="['/user-details-mpm', mood.userId, 'view']">{{mood.userId}}</a>
+                    </div>
                 </dd>
                 <dt><span jhiTranslate="campFireApp.mood.sprint">Sprint</span></dt>
                 <dd>

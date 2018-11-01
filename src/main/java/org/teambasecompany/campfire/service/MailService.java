@@ -6,6 +6,7 @@ import io.github.jhipster.config.JHipsterProperties;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Locale;
+import java.util.Map;
 import javax.mail.internet.MimeMessage;
 
 import org.slf4j.Logger;
@@ -82,6 +83,22 @@ public class MailService {
         String content = templateEngine.process(templateName, context);
         String subject = messageSource.getMessage(titleKey, null, locale);
         sendEmail(user.getEmail(), subject, content, false, true);
+
+    }
+
+    @Async
+    public void sendEmailFromTemplate(String to, String templateName, String titleKey, Map<String, Object> params) {
+        Locale locale = Locale.getDefault();
+        Context context = new Context(locale);
+        context.setVariable(BASE_URL, jHipsterProperties.getMail().getBaseUrl());
+        if (!params.isEmpty()) {
+            for (String key : params.keySet()) {
+                context.setVariable(key, params.get(key));
+            }
+        }
+        String content = templateEngine.process(templateName, context);
+        String subject = messageSource.getMessage(titleKey, null, locale);
+        sendEmail(to, subject, content, false, true);
 
     }
 

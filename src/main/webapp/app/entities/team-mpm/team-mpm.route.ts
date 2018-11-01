@@ -10,6 +10,7 @@ import { TeamMpmComponent } from './team-mpm.component';
 import { TeamMpmDetailComponent } from './team-mpm-detail.component';
 import { TeamMpmUpdateComponent } from './team-mpm-update.component';
 import { TeamMpmDeletePopupComponent } from './team-mpm-delete-dialog.component';
+import { TeamMpmJoinComponent } from './team-mpm-join.component';
 import { ITeamMpm } from 'app/shared/model/team-mpm.model';
 
 @Injectable({ providedIn: 'root' })
@@ -62,6 +63,18 @@ export const teamRoute: Routes = [
     {
         path: 'team-mpm/:id/edit',
         component: TeamMpmUpdateComponent,
+        resolve: {
+            team: TeamMpmResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'campFireApp.team.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'team-mpm/:id/join',
+        component: TeamMpmJoinComponent,
         resolve: {
             team: TeamMpmResolve
         },

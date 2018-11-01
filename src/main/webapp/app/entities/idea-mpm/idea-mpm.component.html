@@ -16,7 +16,8 @@
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="description"><span jhiTranslate="campFireApp.idea.description">Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="userLogin"><span jhiTranslate="campFireApp.idea.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="userId"><span jhiTranslate="campFireApp.idea.user">User</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="teamName"><span jhiTranslate="campFireApp.idea.team">Team</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th></th>
             </tr>
             </thead>
@@ -25,7 +26,14 @@
                 <td><a [routerLink]="['/idea-mpm', idea.id, 'view' ]">{{idea.id}}</a></td>
                 <td>{{idea.description}}</td>
                 <td>
-                    {{idea.userLogin}}
+                    <div *ngIf="idea.userId">
+                        <a [routerLink]="['../user-details-mpm', idea.userId , 'view' ]" >{{idea.userId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="idea.teamId">
+                        <a [routerLink]="['../team-mpm', idea.teamId , 'view' ]" >{{idea.teamName}}</a>
+                    </div>
                 </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

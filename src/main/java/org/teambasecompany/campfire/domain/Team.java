@@ -31,6 +31,12 @@ public class Team implements Serializable {
     @DBRef
     @Field("folder")
     private Set<Folder> folders = new HashSet<>();
+    @DBRef
+    @Field("member")
+    private Set<UserDetails> members = new HashSet<>();
+    @DBRef
+    @Field("idea")
+    private Set<Idea> ideas = new HashSet<>();
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
@@ -101,6 +107,56 @@ public class Team implements Serializable {
 
     public void setFolders(Set<Folder> folders) {
         this.folders = folders;
+    }
+
+    public Set<UserDetails> getMembers() {
+        return members;
+    }
+
+    public Team members(Set<UserDetails> userDetails) {
+        this.members = userDetails;
+        return this;
+    }
+
+    public Team addMember(UserDetails userDetails) {
+        this.members.add(userDetails);
+        userDetails.setTeam(this);
+        return this;
+    }
+
+    public Team removeMember(UserDetails userDetails) {
+        this.members.remove(userDetails);
+        userDetails.setTeam(null);
+        return this;
+    }
+
+    public void setMembers(Set<UserDetails> userDetails) {
+        this.members = userDetails;
+    }
+
+    public Set<Idea> getIdeas() {
+        return ideas;
+    }
+
+    public Team ideas(Set<Idea> ideas) {
+        this.ideas = ideas;
+        return this;
+    }
+
+    public Team addIdea(Idea idea) {
+        this.ideas.add(idea);
+        idea.setTeam(this);
+        return this;
+    }
+
+    public Team removeIdea(Idea idea) {
+        this.ideas.remove(idea);
+        idea.setTeam(null);
+        return this;
+    }
+
+    public void setIdeas(Set<Idea> ideas) {
+        this.ideas = ideas;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

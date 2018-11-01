@@ -13,8 +13,14 @@
         {
             "relationshipType": "many-to-one",
             "relationshipName": "user",
-            "otherEntityName": "user",
-            "otherEntityField": "login"
+            "otherEntityName": "userDetails",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "team",
+            "otherEntityName": "team",
+            "otherEntityField": "name"
         }
     ],
     "changelogDate": "20181029120329",

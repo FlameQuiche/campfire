@@ -20,8 +20,6 @@ public class MoodDTO implements Serializable {
 
     private String userId;
 
-    private String userLogin;
-
     private String sprintId;
 
     private String sprintName;
@@ -54,16 +52,8 @@ public class MoodDTO implements Serializable {
         return userId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
-
-    public String getUserLogin() {
-        return userLogin;
-    }
-
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
+    public void setUserId(String userDetailsId) {
+        this.userId = userDetailsId;
     }
 
     public String getSprintId() {
@@ -110,7 +100,6 @@ public class MoodDTO implements Serializable {
             ", rank=" + getRank() +
             ", date='" + getDate() + "'" +
             ", user=" + getUserId() +
-            ", user='" + getUserLogin() + "'" +
             ", sprint=" + getSprintId() +
             ", sprint='" + getSprintName() + "'" +
             "}";

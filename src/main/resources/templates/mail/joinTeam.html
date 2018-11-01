@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="#{email.join.title}">Campfire team join</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" th:href="@{|${baseUrl}/favicon.ico|}" />
+</head>
+<body>
+<p>
+    <i th:text="@{|${fromUser}|}"></i> invited you to join the team: <b th:text="@{|${team.name}|}"></b>. Please click the link below to join after registration.
+</p>
+<p>
+    <a th:with="url=(@{|${baseUrl}/#/team-mpm/${team.id}/join|})" th:href="${url}"
+       th:text="${url}">Join link</a>
+</p>
+<p>
+    <span>Regards, </span>
+    <br/>
+    <em>CampFire.</em>
+</p>
+</body>
+</html>

@@ -12,6 +12,8 @@ public class TeamDTO implements Serializable {
 
     private String name;
 
+    private Integer members;
+
     public String getId() {
         return id;
     }
@@ -26,6 +28,14 @@ public class TeamDTO implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Integer getMembers() {
+        return members;
+    }
+
+    public void setMembers(Integer members) {
+        this.members = members;
     }
 
     @Override

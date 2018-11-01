@@ -7,7 +7,8 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IMoodMpm } from 'app/shared/model/mood-mpm.model';
 import { MoodMpmService } from './mood-mpm.service';
-import { IUser, UserService } from 'app/core';
+import { IUserDetailsMpm } from 'app/shared/model/user-details-mpm.model';
+import { UserDetailsMpmService } from 'app/entities/user-details-mpm';
 import { ISprintMpm } from 'app/shared/model/sprint-mpm.model';
 import { SprintMpmService } from 'app/entities/sprint-mpm';
 
@@ -19,7 +20,7 @@ export class MoodMpmUpdateComponent implements OnInit {
     mood: IMoodMpm;
     isSaving: boolean;
 
-    users: IUser[];
+    userdetails: IUserDetailsMpm[];
 
     sprints: ISprintMpm[];
     dateDp: any;
@@ -27,7 +28,7 @@ export class MoodMpmUpdateComponent implements OnInit {
     constructor(
         private jhiAlertService: JhiAlertService,
         private moodService: MoodMpmService,
-        private userService: UserService,
+        private userDetailsService: UserDetailsMpmService,
         private sprintService: SprintMpmService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -37,9 +38,9 @@ export class MoodMpmUpdateComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ mood }) => {
             this.mood = mood;
         });
-        this.userService.query().subscribe(
-            (res: HttpResponse<IUser[]>) => {
-                this.users = res.body;
+        this.userDetailsService.query().subscribe(
+            (res: HttpResponse<IUserDetailsMpm[]>) => {
+                this.userdetails = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -81,7 +82,7 @@ export class MoodMpmUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackUserById(index: number, item: IUser) {
+    trackUserDetailsById(index: number, item: IUserDetailsMpm) {
         return item.id;
     }
 

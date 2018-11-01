@@ -1,3 +1,6 @@
+entity UserDetails {
+	id String required
+}
 entity Folder {
 	id Long,
     name String required
@@ -44,13 +47,19 @@ entity Team {
 
 relationship ManyToOne {
 	Bookmark{folder(name)} to Folder{bookmark},
-    Idea{user(login)} to User,
-    Mood{user(login)} to User,
+    Idea{user(id)} to UserDetails,
+    Mood{user(id)} to UserDetails,
     Mood{sprint(name)} to Sprint{mood},
     Action{sprint(name)} to Sprint{action},
     Sprint{team(name)} to Team{sprint},
-    Folder{team(name)} to Team{folder}
+    Folder{team(name)} to Team{folder},
+    UserDetails{team(name)} to Team{member},
+    Idea{team(name)} to Team{idea},
 
+}
+
+relationship OneToOne {
+	UserDetails{user} to User
 }
 
 relationship ManyToMany {

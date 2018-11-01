@@ -8,11 +8,10 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Mood and its DTO MoodDTO.
  */
-@Mapper(componentModel = "spring", uses = {UserMapper.class, SprintMapper.class})
+@Mapper(componentModel = "spring", uses = {UserDetailsMapper.class, SprintMapper.class})
 public interface MoodMapper extends EntityMapper<MoodDTO, Mood> {
 
     @Mapping(source = "user.id", target = "userId")
-    @Mapping(source = "user.login", target = "userLogin")
     @Mapping(source = "sprint.id", target = "sprintId")
     @Mapping(source = "sprint.name", target = "sprintName")
     MoodDTO toDto(Mood mood);

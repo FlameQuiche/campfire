@@ -18,6 +18,18 @@
             "relationshipName": "folder",
             "otherEntityName": "folder",
             "otherEntityRelationshipName": "team"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "member",
+            "otherEntityName": "userDetails",
+            "otherEntityRelationshipName": "team"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "idea",
+            "otherEntityName": "idea",
+            "otherEntityRelationshipName": "team"
         }
     ],
     "changelogDate": "20181029120331",

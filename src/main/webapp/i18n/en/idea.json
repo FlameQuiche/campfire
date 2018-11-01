@@ -17,7 +17,8 @@
                 "title": "Idea"
             },
             "description": "Description",
-            "user": "User"
+            "user": "User",
+            "team": "Team"
         }
     }
 }
