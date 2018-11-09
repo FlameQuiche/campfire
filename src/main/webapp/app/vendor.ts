@@ -78,4 +78,5 @@ library.add(faSearch);
 library.add(faTrashAlt);
 library.add(faAsterisk);
 
+import 'chart.js/src/chart.js';
 // jhipster-needle-add-element-to-vendor - JHipster will add new menu items here
