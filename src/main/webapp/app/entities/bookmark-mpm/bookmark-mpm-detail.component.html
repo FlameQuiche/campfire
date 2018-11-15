@@ -13,10 +13,14 @@
                 <dd>
                     <span>{{bookmark.url}}</span>
                 </dd>
-                <dt><span jhiTranslate="campFireApp.bookmark.folder">Folder</span></dt>
+                <dt><span jhiTranslate="campFireApp.bookmark.tags">Tags</span></dt>
                 <dd>
-                    <div *ngIf="bookmark.folderId">
-                        <a [routerLink]="['/folder-mpm', bookmark.folderId, 'view']">{{bookmark.folderName}}</a>
+                    <span>{{bookmark.tags}}</span>
+                </dd>
+                <dt><span jhiTranslate="campFireApp.bookmark.team">Team</span></dt>
+                <dd>
+                    <div *ngIf="bookmark.teamId">
+                        <a [routerLink]="['/team-mpm', bookmark.teamId, 'view']">{{bookmark.teamName}}</a>
                     </div>
                 </dd>
             </dl>

@@ -14,13 +14,17 @@
             "fieldValidateRules": [
                 "required"
             ]
+        },
+        {
+            "fieldName": "tags",
+            "fieldType": "String"
         }
     ],
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "relationshipName": "folder",
-            "otherEntityName": "folder",
+            "relationshipName": "team",
+            "otherEntityName": "team",
             "otherEntityField": "name"
         }
     ],

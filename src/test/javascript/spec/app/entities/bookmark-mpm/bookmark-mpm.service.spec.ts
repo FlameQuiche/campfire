@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(BookmarkMpmService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new BookmarkMpm('ID', 'AAAAAAA', 'AAAAAAA');
+            elemDefault = new BookmarkMpm('ID', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
         });
 
         describe('Service methods', async () => {
@@ -56,7 +56,8 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
-                        url: 'BBBBBB'
+                        url: 'BBBBBB',
+                        tags: 'BBBBBB'
                     },
                     elemDefault
                 );
@@ -74,7 +75,8 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         name: 'BBBBBB',
-                        url: 'BBBBBB'
+                        url: 'BBBBBB',
+                        tags: 'BBBBBB'
                     },
                     elemDefault
                 );

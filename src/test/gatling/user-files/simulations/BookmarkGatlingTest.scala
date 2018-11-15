@@ -74,6 +74,7 @@ class BookmarkGatlingTest extends Simulation {
                 "id":null
                 , "name":"SAMPLE_TEXT"
                 , "url":"SAMPLE_TEXT"
+                , "tags":"SAMPLE_TEXT"
                 }""")).asJSON
             .check(status.is(201))
             .check(headerRegex("Location", "(.*)").saveAs("new_bookmark_url"))).exitHereIfFailed

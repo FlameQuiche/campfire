@@ -1,7 +1,10 @@
 package org.teambasecompany.campfire.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import org.apache.commons.lang3.StringUtils;
 import org.teambasecompany.campfire.service.BookmarkService;
+import org.teambasecompany.campfire.service.TeamService;
+import org.teambasecompany.campfire.service.dto.TeamDTO;
 import org.teambasecompany.campfire.web.rest.errors.BadRequestAlertException;
 import org.teambasecompany.campfire.web.rest.util.HeaderUtil;
 import org.teambasecompany.campfire.web.rest.util.PaginationUtil;
@@ -20,6 +23,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,9 +39,11 @@ public class BookmarkResource {
     private static final String ENTITY_NAME = "bookmark";
 
     private BookmarkService bookmarkService;
+    private TeamService teamService;
 
-    public BookmarkResource(BookmarkService bookmarkService) {
+    public BookmarkResource(BookmarkService bookmarkService, TeamService teamService) {
         this.bookmarkService = bookmarkService;
+        this.teamService = teamService;
     }
 
     /**
@@ -90,9 +96,17 @@ public class BookmarkResource {
      */
     @GetMapping("/bookmarks")
     @Timed
-    public ResponseEntity<List<BookmarkDTO>> getAllBookmarks(Pageable pageable) {
+    public ResponseEntity<List<BookmarkDTO>> getAllBookmarks(Pageable pageable, @RequestParam(required = false) String team,
+                                                             @RequestParam(required = false) String query, Principal principal) {
         log.debug("REST request to get a page of Bookmarks");
-        Page<BookmarkDTO> page = bookmarkService.findAll(pageable);
+        if (StringUtils.isEmpty(team)) {
+            List<TeamDTO> teams = teamService.findAll(principal.getName());
+            if (teams.isEmpty()) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            team = teams.get(0).getId();
+        }
+        Page<BookmarkDTO> page = bookmarkService.findAll(pageable, team, query);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/bookmarks");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

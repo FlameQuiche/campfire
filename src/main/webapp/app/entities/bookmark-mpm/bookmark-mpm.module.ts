@@ -1,15 +1,15 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { CampFireSharedModule } from 'app/shared';
 import {
     BookmarkMpmComponent,
+    BookmarkMpmDeleteDialogComponent,
+    BookmarkMpmDeletePopupComponent,
     BookmarkMpmDetailComponent,
     BookmarkMpmUpdateComponent,
-    BookmarkMpmDeletePopupComponent,
-    BookmarkMpmDeleteDialogComponent,
-    bookmarkRoute,
-    bookmarkPopupRoute
+    bookmarkPopupRoute,
+    bookmarkRoute
 } from './';
 
 const ENTITY_STATES = [...bookmarkRoute, ...bookmarkPopupRoute];

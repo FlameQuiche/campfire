@@ -16,7 +16,6 @@
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Entities",
-                "folderMpm": "Folder",
                 "bookmarkMpm": "Bookmark",
                 "sprintMpm": "Sprint",
                 "moodMpm": "Mood",
@@ -24,6 +23,7 @@
                 "actionMpm": "Action",
                 "teamMpm": "Team",
                 "userDetailsMpm": "User Details",
+                "tagMpm": "Tag",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

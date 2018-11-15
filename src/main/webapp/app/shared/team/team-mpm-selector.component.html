@@ -1,0 +1,6 @@
+<div>
+    <span class="form-control-label team-selector-label" jhiTranslate="campFireApp.bookmark.pick" for="field_team">Pick a team</span>
+    <select class="form-control team-selector" id="field_team" name="team" [(ngModel)]="selectedTeam" (change)="loadAll()">
+        <option [ngValue]="teamOption.id" *ngFor="let teamOption of teams; trackBy: trackTeamById">{{teamOption.name}}</option>
+    </select>
+</div>

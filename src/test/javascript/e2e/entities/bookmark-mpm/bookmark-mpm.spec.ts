@@ -41,10 +41,12 @@ describe('Bookmark e2e test', () => {
         await promise.all([
             bookmarkUpdatePage.setNameInput('name'),
             bookmarkUpdatePage.setUrlInput('url'),
-            bookmarkUpdatePage.folderSelectLastOption()
+            bookmarkUpdatePage.setTagsInput('tags'),
+            bookmarkUpdatePage.teamSelectLastOption()
         ]);
         expect(await bookmarkUpdatePage.getNameInput()).to.eq('name');
         expect(await bookmarkUpdatePage.getUrlInput()).to.eq('url');
+        expect(await bookmarkUpdatePage.getTagsInput()).to.eq('tags');
         await bookmarkUpdatePage.save();
         expect(await bookmarkUpdatePage.getSaveButton().isPresent()).to.be.false;
 

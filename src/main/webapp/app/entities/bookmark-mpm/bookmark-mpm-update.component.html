@@ -31,12 +31,16 @@
                         </small>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="campFireApp.bookmark.tags" for="field_tags">Tags</label>
+                    <input type="text" class="form-control" name="tags" id="field_tags"
+                        [(ngModel)]="bookmark.tags" />
+                </div>
 
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="campFireApp.bookmark.folder" for="field_folder">Folder</label>
-                    <select class="form-control" id="field_folder" name="folder" [(ngModel)]="bookmark.folderId" >
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="folderOption.id" *ngFor="let folderOption of folders; trackBy: trackFolderById">{{folderOption.name}}</option>
+                    <label class="form-control-label" jhiTranslate="campFireApp.bookmark.team" for="field_team">Team</label>
+                    <select class="form-control" id="field_team" name="team" [(ngModel)]="bookmark.teamId" required>
+                        <option [ngValue]="teamOption.id" *ngFor="let teamOption of teams; trackBy: trackTeamById">{{teamOption.name}}</option>
                     </select>
                 </div>
             </div>

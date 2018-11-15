@@ -1,6 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-import { CampFireFolderMpmModule } from './folder-mpm/folder-mpm.module';
 import { CampFireBookmarkMpmModule } from './bookmark-mpm/bookmark-mpm.module';
 import { CampFireSprintMpmModule } from './sprint-mpm/sprint-mpm.module';
 import { CampFireMoodMpmModule } from './mood-mpm/mood-mpm.module';
@@ -13,7 +12,6 @@ import { CampFireUserDetailsMpmModule } from './user-details-mpm/user-details-mp
 @NgModule({
     // prettier-ignore
     imports: [
-        CampFireFolderMpmModule,
         CampFireBookmarkMpmModule,
         CampFireSprintMpmModule,
         CampFireMoodMpmModule,
