@@ -34,6 +34,14 @@ spring:
         port: 587
         username: ${EMAIL_USERNAME}
         password: ${EMAIL_PASSWORD}
+        protocol: smtp
+        tls: true
+        properties.mail.smtp:
+            auth: true
+            starttls.enable: true
+            ssl.trust: smtp.gmail.com
+            socketFactory.port: 465
+            socketFactory.fallback: false
     thymeleaf:
         cache: true
 
@@ -91,8 +99,8 @@ jhipster:
                 token-validity-in-seconds: 86400
                 token-validity-in-seconds-for-remember-me: 2592000
     mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: CampFire@localhost
-        base-url: http://my-server-url-to-change # Modify according to your server's URL
+        from: CampFire
+        base-url: ${EMAIL_SERVER_BASE_URL}
     metrics: # DropWizard Metrics configuration, used by MetricsConfiguration
         jmx:
             enabled: true
