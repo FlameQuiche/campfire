@@ -9,6 +9,7 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { BookmarkMpmService } from './bookmark-mpm.service';
+import { TeamMpmService } from 'app/entities/team-mpm';
 
 @Component({
     selector: 'jhi-bookmark-mpm',
@@ -32,6 +33,7 @@ export class BookmarkMpmComponent implements OnInit, OnDestroy {
 
     constructor(
         private bookmarkService: BookmarkMpmService,
+        private teamService: TeamMpmService,
         private parseLinks: JhiParseLinks,
         private jhiAlertService: JhiAlertService,
         private principal: Principal,
@@ -48,12 +50,13 @@ export class BookmarkMpmComponent implements OnInit, OnDestroy {
         });
     }
 
-    loadAll() {
+    loadAll(selectedTeam) {
         this.bookmarkService
             .query({
                 page: this.page - 1,
                 size: this.itemsPerPage,
-                sort: this.sort()
+                sort: this.sort(),
+                team: selectedTeam
             })
             .subscribe(
                 (res: HttpResponse<IBookmarkMpm[]>) => this.paginateBookmarks(res.body, res.headers),
@@ -76,7 +79,7 @@ export class BookmarkMpmComponent implements OnInit, OnDestroy {
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         });
-        this.loadAll();
+        this.loadAll(null);
     }
 
     clear() {
@@ -88,15 +91,22 @@ export class BookmarkMpmComponent implements OnInit, OnDestroy {
                 sort: this.predicate + ',' + (this.reverse ? 'asc' : 'desc')
             }
         ]);
-        this.loadAll();
+        this.loadAll(null);
     }
 
     ngOnInit() {
-        this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
         this.registerChangeInBookmarks();
+        this.registerChangeTeam();
+        this.loadAll(null);
+    }
+
+    registerChangeTeam() {
+        this.eventManager.subscribe('selectedTeamChanged', res => {
+            this.loadAll(res.content);
+        });
     }
 
     ngOnDestroy() {
@@ -108,7 +118,7 @@ export class BookmarkMpmComponent implements OnInit, OnDestroy {
     }
 
     registerChangeInBookmarks() {
-        this.eventSubscriber = this.eventManager.subscribe('bookmarkListModification', response => this.loadAll());
+        this.eventSubscriber = this.eventManager.subscribe('bookmarkListModification', response => this.loadAll(null));
     }
 
     sort() {

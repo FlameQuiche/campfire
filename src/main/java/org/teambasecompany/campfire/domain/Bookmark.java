@@ -8,6 +8,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -29,10 +30,13 @@ public class Bookmark implements Serializable {
     @Field("url")
     private String url;
 
+    @Field("tags")
+    private List<String> tags;
+
     @DBRef
-    @Field("folder")
+    @Field("team")
     @JsonIgnoreProperties("bookmarks")
-    private Folder folder;
+    private Team team;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
@@ -69,17 +73,30 @@ public class Bookmark implements Serializable {
         this.url = url;
     }
 
-    public Folder getFolder() {
-        return folder;
+    public List<String> getTags() {
+        return tags;
     }
 
-    public Bookmark folder(Folder folder) {
-        this.folder = folder;
+    public Bookmark tags(List<String> tags) {
+        this.tags = tags;
         return this;
     }
 
-    public void setFolder(Folder folder) {
-        this.folder = folder;
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public Bookmark team(Team team) {
+        this.team = team;
+        return this;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -109,6 +126,7 @@ public class Bookmark implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", url='" + getUrl() + "'" +
+            ", tags='" + getTags() + "'" +
             "}";
     }
 }

@@ -2,6 +2,7 @@ package org.teambasecompany.campfire.service.dto;
 
 import javax.validation.constraints.*;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -17,9 +18,11 @@ public class BookmarkDTO implements Serializable {
     @NotNull
     private String url;
 
-    private String folderId;
+    private List<String> tags;
 
-    private String folderName;
+    private String teamId;
+
+    private String teamName;
 
     public String getId() {
         return id;
@@ -45,20 +48,28 @@ public class BookmarkDTO implements Serializable {
         this.url = url;
     }
 
-    public String getFolderId() {
-        return folderId;
+    public List<String> getTags() {
+        return tags;
     }
 
-    public void setFolderId(String folderId) {
-        this.folderId = folderId;
+    public void setTags(List<String> tags) {
+        this.tags = tags;
     }
 
-    public String getFolderName() {
-        return folderName;
+    public String getTeamId() {
+        return teamId;
     }
 
-    public void setFolderName(String folderName) {
-        this.folderName = folderName;
+    public void setTeamId(String teamId) {
+        this.teamId = teamId;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
     }
 
     @Override
@@ -88,8 +99,9 @@ public class BookmarkDTO implements Serializable {
             "id=" + getId() +
             ", name='" + getName() + "'" +
             ", url='" + getUrl() + "'" +
-            ", folder=" + getFolderId() +
-            ", folder='" + getFolderName() + "'" +
+            ", tags='" + getTags() + "'" +
+            ", team=" + getTeamId() +
+            ", team='" + getTeamName() + "'" +
             "}";
     }
 }

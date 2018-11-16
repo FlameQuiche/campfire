@@ -29,8 +29,8 @@ public class Team implements Serializable {
     @Field("sprint")
     private Set<Sprint> sprints = new HashSet<>();
     @DBRef
-    @Field("folder")
-    private Set<Folder> folders = new HashSet<>();
+    @Field("bookmark")
+    private Set<Bookmark> bookmarks = new HashSet<>();
     @DBRef
     @Field("member")
     private Set<UserDetails> members = new HashSet<>();
@@ -84,29 +84,29 @@ public class Team implements Serializable {
         this.sprints = sprints;
     }
 
-    public Set<Folder> getFolders() {
-        return folders;
+    public Set<Bookmark> getBookmarks() {
+        return bookmarks;
     }
 
-    public Team folders(Set<Folder> folders) {
-        this.folders = folders;
+    public Team bookmarks(Set<Bookmark> bookmarks) {
+        this.bookmarks = bookmarks;
         return this;
     }
 
-    public Team addFolder(Folder folder) {
-        this.folders.add(folder);
-        folder.setTeam(this);
+    public Team addBookmark(Bookmark bookmark) {
+        this.bookmarks.add(bookmark);
+        bookmark.setTeam(this);
         return this;
     }
 
-    public Team removeFolder(Folder folder) {
-        this.folders.remove(folder);
-        folder.setTeam(null);
+    public Team removeBookmark(Bookmark bookmark) {
+        this.bookmarks.remove(bookmark);
+        bookmark.setTeam(null);
         return this;
     }
 
-    public void setFolders(Set<Folder> folders) {
-        this.folders = folders;
+    public void setBookmarks(Set<Bookmark> bookmarks) {
+        this.bookmarks = bookmarks;
     }
 
     public Set<UserDetails> getMembers() {

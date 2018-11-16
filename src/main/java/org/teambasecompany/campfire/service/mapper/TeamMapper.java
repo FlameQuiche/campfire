@@ -17,7 +17,6 @@ public interface TeamMapper extends EntityMapper<TeamDTO, Team> {
     TeamDTO toDto(Team team);
 
     @Mapping(target = "sprints", ignore = true)
-    @Mapping(target = "folders", ignore = true)
     @Mapping(target = "members", ignore = true)
     @Mapping(target = "ideas", ignore = true)
     Team toEntity(TeamDTO teamDTO);

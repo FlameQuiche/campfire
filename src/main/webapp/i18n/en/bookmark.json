@@ -18,7 +18,9 @@
             },
             "name": "Name",
             "url": "Url",
-            "folder": "Folder"
+            "tags": "Tags",
+            "team": "Team",
+            "pick": "Pick a team"
         }
     }
 }

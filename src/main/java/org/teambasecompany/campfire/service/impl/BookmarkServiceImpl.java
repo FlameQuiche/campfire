@@ -1,5 +1,6 @@
 package org.teambasecompany.campfire.service.impl;
 
+import org.apache.commons.lang3.StringUtils;
 import org.teambasecompany.campfire.service.BookmarkService;
 import org.teambasecompany.campfire.domain.Bookmark;
 import org.teambasecompany.campfire.repository.BookmarkRepository;
@@ -50,13 +51,16 @@ public class BookmarkServiceImpl implements BookmarkService {
      * Get all the bookmarks.
      *
      * @param pageable the pagination information
+     * @param team the team of the current user
+     * @param query the query to filter bookmarks
      * @return the list of entities
      */
     @Override
-    public Page<BookmarkDTO> findAll(Pageable pageable) {
-        log.debug("Request to get all Bookmarks");
-        return bookmarkRepository.findAll(pageable)
-            .map(bookmarkMapper::toDto);
+    public Page<BookmarkDTO> findAll(Pageable pageable, String team, String query) {
+        log.debug("Request to get all Bookmarks for team: {} using query : {} ", team, query);
+        return StringUtils.isEmpty(query) ? bookmarkRepository.findAllByTeam(pageable, team).map(bookmarkMapper::toDto) :
+            bookmarkRepository.findAllByTeamAndTagsContainingIgnoreCaseOrNameContainingIgnoreCaseOrUrlContainingIgnoreCase(
+                pageable, team, query, query, query).map(bookmarkMapper::toDto);
     }
 
 

@@ -15,8 +15,8 @@
         },
         {
             "relationshipType": "one-to-many",
-            "relationshipName": "folder",
-            "otherEntityName": "folder",
+            "relationshipName": "bookmark",
+            "otherEntityName": "bookmark",
             "otherEntityRelationshipName": "team"
         },
         {

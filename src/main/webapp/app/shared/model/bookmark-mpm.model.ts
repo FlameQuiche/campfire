@@ -2,10 +2,18 @@ export interface IBookmarkMpm {
     id?: string;
     name?: string;
     url?: string;
-    folderName?: string;
-    folderId?: string;
+    tags?: any;
+    teamName?: string;
+    teamId?: string;
 }
 
 export class BookmarkMpm implements IBookmarkMpm {
-    constructor(public id?: string, public name?: string, public url?: string, public folderName?: string, public folderId?: string) {}
+    constructor(
+        public id?: string,
+        public name?: string,
+        public url?: string,
+        public tags?: any,
+        public teamName?: string,
+        public teamId?: string
+    ) {}
 }

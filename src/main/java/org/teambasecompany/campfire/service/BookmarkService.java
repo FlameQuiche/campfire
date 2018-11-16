@@ -24,9 +24,11 @@ public interface BookmarkService {
      * Get all the bookmarks.
      *
      * @param pageable the pagination information
+     * @param team the team of the current user
+     * @param query the query to filter bookmarks
      * @return the list of entities
      */
-    Page<BookmarkDTO> findAll(Pageable pageable);
+    Page<BookmarkDTO> findAll(Pageable pageable, String team, String query);
 
 
     /**

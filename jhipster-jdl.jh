@@ -1,11 +1,11 @@
 entity UserDetails {
 	id String required
 }
-entity Folder {
-	id Long,
-    name String required
-}
 
+entity Tag {
+	id Long required,
+    label String required
+}
 entity Bookmark {
 	id Long,
     name String required,
@@ -46,13 +46,12 @@ entity Team {
 }
 
 relationship ManyToOne {
-	Bookmark{folder(name)} to Folder{bookmark},
-    Idea{user(id)} to UserDetails,
+	Idea{user(id)} to UserDetails,
     Mood{user(id)} to UserDetails,
     Mood{sprint(name)} to Sprint{mood},
     Action{sprint(name)} to Sprint{action},
     Sprint{team(name)} to Team{sprint},
-    Folder{team(name)} to Team{folder},
+    Bookmark{team(name)} to Team{bookmark},
     UserDetails{team(name)} to Team{member},
     Idea{team(name)} to Team{idea},
 
@@ -62,13 +61,13 @@ relationship OneToOne {
 	UserDetails{user} to User
 }
 
-relationship ManyToMany {
-	Folder{subFolder(name)} to Folder
+relationship OneToMany {
+	Tag{bookmark} to Bookmark{tags(label)}
 }
 
 // Set pagination options
 // paginate JobHistory, Employee with infinite-scroll
-paginate Folder, Bookmark, Sprint, Idea, Action with pagination
+paginate Bookmark, Sprint, Idea, Action with pagination
 
 dto * with mapstruct
 

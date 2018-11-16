@@ -6,8 +6,8 @@ import { JhiAlertService } from 'ng-jhipster';
 
 import { IBookmarkMpm } from 'app/shared/model/bookmark-mpm.model';
 import { BookmarkMpmService } from './bookmark-mpm.service';
-import { IFolderMpm } from 'app/shared/model/folder-mpm.model';
-import { FolderMpmService } from 'app/entities/folder-mpm';
+import { ITeamMpm } from 'app/shared/model/team-mpm.model';
+import { TeamMpmService } from 'app/entities/team-mpm';
 
 @Component({
     selector: 'jhi-bookmark-mpm-update',
@@ -17,23 +17,26 @@ export class BookmarkMpmUpdateComponent implements OnInit {
     bookmark: IBookmarkMpm;
     isSaving: boolean;
 
-    folders: IFolderMpm[];
+    teams: ITeamMpm[];
 
     constructor(
         private jhiAlertService: JhiAlertService,
         private bookmarkService: BookmarkMpmService,
-        private folderService: FolderMpmService,
+        private teamService: TeamMpmService,
         private activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ bookmark }) => {
+            if (bookmark.tags) {
+                bookmark.tags = bookmark.tags.join(',');
+            }
             this.bookmark = bookmark;
         });
-        this.folderService.query().subscribe(
-            (res: HttpResponse<IFolderMpm[]>) => {
-                this.folders = res.body;
+        this.teamService.query().subscribe(
+            (res: HttpResponse<ITeamMpm[]>) => {
+                this.teams = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -45,6 +48,10 @@ export class BookmarkMpmUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
+        if (this.bookmark.tags) {
+            this.bookmark.tags = this.bookmark.tags.split(',');
+            this.bookmark.tags.forEach(t => t.trim());
+        }
         if (this.bookmark.id !== undefined) {
             this.subscribeToSaveResponse(this.bookmarkService.update(this.bookmark));
         } else {
@@ -69,7 +76,7 @@ export class BookmarkMpmUpdateComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    trackFolderById(index: number, item: IFolderMpm) {
+    trackTeamById(index: number, item: ITeamMpm) {
         return item.id;
     }
 }

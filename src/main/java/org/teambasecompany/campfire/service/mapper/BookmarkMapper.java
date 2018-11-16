@@ -8,14 +8,14 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity Bookmark and its DTO BookmarkDTO.
  */
-@Mapper(componentModel = "spring", uses = {FolderMapper.class})
+@Mapper(componentModel = "spring", uses = {TeamMapper.class})
 public interface BookmarkMapper extends EntityMapper<BookmarkDTO, Bookmark> {
 
-    @Mapping(source = "folder.id", target = "folderId")
-    @Mapping(source = "folder.name", target = "folderName")
+    @Mapping(source = "team.id", target = "teamId")
+    @Mapping(source = "team.name", target = "teamName")
     BookmarkDTO toDto(Bookmark bookmark);
 
-    @Mapping(source = "folderId", target = "folder")
+    @Mapping(source = "teamId", target = "team")
     Bookmark toEntity(BookmarkDTO bookmarkDTO);
 
     default Bookmark fromId(String id) {

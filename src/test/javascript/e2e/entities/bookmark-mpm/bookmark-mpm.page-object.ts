@@ -28,7 +28,8 @@ export class BookmarkUpdatePage {
     cancelButton = element(by.id('cancel-save'));
     nameInput = element(by.id('field_name'));
     urlInput = element(by.id('field_url'));
-    folderSelect = element(by.id('field_folder'));
+    tagsInput = element(by.id('field_tags'));
+    teamSelect = element(by.id('field_team'));
 
     async getPageTitle() {
         return this.pageTitle.getAttribute('jhiTranslate');
@@ -50,23 +51,31 @@ export class BookmarkUpdatePage {
         return this.urlInput.getAttribute('value');
     }
 
-    async folderSelectLastOption() {
-        await this.folderSelect
+    async setTagsInput(tags) {
+        await this.tagsInput.sendKeys(tags);
+    }
+
+    async getTagsInput() {
+        return this.tagsInput.getAttribute('value');
+    }
+
+    async teamSelectLastOption() {
+        await this.teamSelect
             .all(by.tagName('option'))
             .last()
             .click();
     }
 
-    async folderSelectOption(option) {
-        await this.folderSelect.sendKeys(option);
+    async teamSelectOption(option) {
+        await this.teamSelect.sendKeys(option);
     }
 
-    getFolderSelect(): ElementFinder {
-        return this.folderSelect;
+    getTeamSelect(): ElementFinder {
+        return this.teamSelect;
     }
 
-    async getFolderSelectedOption() {
-        return this.folderSelect.element(by.css('option:checked')).getText();
+    async getTeamSelectedOption() {
+        return this.teamSelect.element(by.css('option:checked')).getText();
     }
 
     async save() {

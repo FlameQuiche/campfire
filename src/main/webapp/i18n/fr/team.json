@@ -16,18 +16,11 @@
             "detail": {
                 "title": "Team"
             },
-            "add-member": "Ajouter un membre",
             "name": "Name",
             "sprint": "Sprint",
-            "folder": "Folder",
-            "join": "Rejoindre",
-            "joined": "Vous avez rejoint l'équipe !",
-            "joined-error": "Une erreur s'est produite, contactez votre administrateur.",
+            "bookmark": "Bookmark",
             "member": "Member",
-            "idea": "Idea",
-            "send": "Envoyer",
-            "sent": "Invitation envoyée.",
-            "sent-error": "Une erreur s'est produite, contactez votre administrateur."
+            "idea": "Idea"
         }
     }
 }
